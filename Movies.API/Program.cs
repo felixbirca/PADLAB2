@@ -1,16 +1,16 @@
-global using FastEndpoints;
+using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Movies.API.Domain;
-using Movies.API.Helper;
+using Movies.API.Helpers;
 using Movies.API.Services;
 
 namespace Movies.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -24,8 +24,10 @@ namespace Movies.API
             //var response = httpClient.Send(new HttpRequestMessage { RequestUri = new Uri("http://syncendpoint.local") });
             //var connectionString = builder.Configuration.GetConnectionString("Default");
             builder.Services.Configure<JsonOptions>(options => options.SerializerOptions.Converters.Add(new DateOnlyJsonConverter()));
-            builder.Services.AddDbContext<MoviesDbContext>(x => x.UseSqlServer("Default"));
+            builder.Services.AddDbContext<MoviesDbContext>(x => x.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING")));
             builder.Services.AddScoped<IMoviesService, MoviesService>();
+            builder.Services.AddScoped<IUsersService, UsersService>();
+
 
             var app = builder.Build();
 
@@ -39,7 +41,13 @@ namespace Movies.API
                 app.UseOpenApi();
                 app.UseSwaggerUi3(s => s.ConfigureDefaults());
             }
-            app.Run("http://localhost:5050");
+
+            await using var scope = app.Services.CreateAsyncScope();
+            using var db = scope.ServiceProvider.GetService<MoviesDbContext>();
+            await db.Database.MigrateAsync();
+
+            app.Run();
         }
+
     }
 }

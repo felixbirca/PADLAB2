@@ -1,5 +1,9 @@
-﻿namespace Movies.API.Domain.Entities
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Movies.API.Domain.Entities
 {
+    [Keyless]
     public class MovieLike
     {
         public Movie Movie { get; set; }

@@ -1,32 +1,30 @@
 ﻿using FastEndpoints;
 using Microsoft.AspNetCore.Authorization;
-using Movies.API.Domain.Entities;
-using Movies.API.DTOs;
 using Movies.API.Services;
 
 namespace Movies.API.Endpoints
 {
-    [HttpPost("/api/movies/edit")]
+    [HttpDelete("/api/movies/delete/{movieId}")]
     [AllowAnonymous]
-    public class EditMovieEndpoint : Endpoint<EditMovieDto>
+    public class DeleteMovieEndpoint : Endpoint<Guid>
     {
         private readonly IMoviesService _moviesService;
 
-        public EditMovieEndpoint(IMoviesService moviesService)
+        public DeleteMovieEndpoint(IMoviesService moviesService)
         {
             _moviesService = moviesService;
         }
 
-        public override async Task HandleAsync(EditMovieDto request, CancellationToken cancellationToken)
+        public override async Task HandleAsync(Guid movieId, CancellationToken cancellationToken)
         {
-            var existingMovie = await _moviesService.GetMovieById(request.Id);
+            var existingMovie = await _moviesService.GetMovieById(movieId);
 
             if (existingMovie == null)
                 AddError("Movie with this Id does not exist.");
 
             ThrowIfAnyErrors();
 
-            await _moviesService.EditMovie(request);
+            await _moviesService.DeleteMovie(movieId);
             await SendOkAsync();
         }
     }
