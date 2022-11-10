@@ -5,12 +5,12 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "172.17.0.4",
-          "Port": 9001
+          "Host": "moviesapi1",
+          "Port": 80
         },
         {
-          "Host": "172.17.0.5",
-          "Port": 9002
+          "Host": "moviesapi2",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/{url}",
@@ -28,11 +28,11 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "172.17.0.4",
+          "Host": "moviesapi1",
           "Port": 80
         },
         {
-          "Host": "172.17.0.5",
+          "Host": "moviesapi2",
           "Port": 80
         }
       ],

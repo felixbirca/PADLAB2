@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.API", "Movies.API\Movies.API.csproj", "{74082D31-2E10-4895-85AC-21856D165DB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "Proxy\Proxy.csproj", "{DC95836E-5976-4EE2-94B4-BF366A9A7551}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proxy", "Proxy\Proxy.csproj", "{DC95836E-5976-4EE2-94B4-BF366A9A7551}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncNode", "SyncNode\SyncNode.csproj", "{CE399292-E4D8-459C-84C7-BF51B04078D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DC95836E-5976-4EE2-94B4-BF366A9A7551}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC95836E-5976-4EE2-94B4-BF366A9A7551}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC95836E-5976-4EE2-94B4-BF366A9A7551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE399292-E4D8-459C-84C7-BF51B04078D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE399292-E4D8-459C-84C7-BF51B04078D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE399292-E4D8-459C-84C7-BF51B04078D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE399292-E4D8-459C-84C7-BF51B04078D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

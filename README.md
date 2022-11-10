@@ -1,4 +1,11 @@
-### How to start the system
+### How to start the system easy
+1. Build docker images in Visual Studio
+2. Run
+```
+docker compose up
+```
+
+### How to start the system harder
 
 1. Build docker images in Visual Studio
 2. Start the API containers using following commands
@@ -13,6 +20,8 @@ docker run --name moviesapi2 -d -p 9002:80 -e "CONNECTION_STRING=Server=IPADDRES
 ```docker ps```
 - Find the IP address of the container
 ```docker inspect CONTAINERID | grep IPAddress```
+- Inspect the runing networks
+```docker network ls```
 - Inspect the bridge network (IP addresses can be found here too)
 ```docker inspect bridge```
 4. Set the ip address of the APIs in ocelot.json
