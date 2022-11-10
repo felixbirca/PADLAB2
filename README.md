@@ -17,14 +17,24 @@ docker run --name moviesapi2 -d -p 9002:80 -e "CONNECTION_STRING=Server=IPADDRES
 ```
 3. Find the IP of the started containers inside docker
 - Check the running containers
-```docker ps```
+```
+docker ps
+```
 - Find the IP address of the container
-```docker inspect CONTAINERID | grep IPAddress```
+```
+docker inspect CONTAINERID | grep IPAddress
+```
 - Inspect the runing networks
-```docker network ls```
+```
+docker network ls
+```
 - Inspect the bridge network (IP addresses can be found here too)
-```docker inspect bridge```
+```
+docker inspect bridge
+```
 4. Set the ip address of the APIs in ocelot.json
 5. Build the docker image for the proxy
 6. Start the proxy
-```docker run -d -p 9999:80 proxy:latest```
+```
+docker run -d -p 9999:80 proxy:latest
+```
