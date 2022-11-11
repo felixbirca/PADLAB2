@@ -1,6 +1,5 @@
 ﻿using FastEndpoints;
 using Microsoft.AspNetCore.Authorization;
-using Movies.API.Domain.Entities;
 using Movies.API.DTOs;
 using Movies.API.Services;
 

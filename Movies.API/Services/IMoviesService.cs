@@ -9,6 +9,7 @@ namespace Movies.API.Services
         Task Create(CreateMovieDto request);
         Task DeleteMovie(Guid id);
         Task EditMovie(EditMovieDto request);
+        Task<IEnumerable<ViewMovieDto>> GetAllMovies();
         Task<Movie?> GetMovieById(Guid id);
         Task LikeMovie(Guid movieId, int userId);
     }

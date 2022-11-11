@@ -56,5 +56,18 @@ namespace Movies.API.Services
         {
             await _context.MovieLikes.AddAsync(new MovieLike { MovieId = movieId, UserId = userId });
         }
+
+        public async Task<IEnumerable<ViewMovieDto>> GetAllMovies()
+        {
+            var movies = await _context.Movies.ToListAsync();
+            return movies.Select(x => new ViewMovieDto
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Budget = x.Budget,
+                Actors = x.Actors.Split(", "),
+                ReleaseDate = x.ReleaseDate
+            });
+        }
     }
 }
