@@ -27,7 +27,7 @@ namespace Movies.API.Services
                 Title = request.Title,
                 Actors = string.Join(", ", request.Actors),
                 Budget = request.Budget,
-                ReleaseDate = request.RleaseDate
+                ReleaseDate = request.ReleaseDate
             });
 
             await _context.SaveChangesAsync();
@@ -40,7 +40,7 @@ namespace Movies.API.Services
             movie.Title = request.Title == null ? movie.Title : request.Title;
             movie.Budget = request.Budget == null ? movie.Budget : (long)request.Budget;
             movie.Actors = request.Actors == null ? movie.Actors : string.Join(", ", request.Actors);
-            movie.ReleaseDate = request.RleaseDate == null ? movie.ReleaseDate : (DateOnly)request.RleaseDate;
+            movie.ReleaseDate = request.ReleaseDate == null ? movie.ReleaseDate : (DateOnly)request.ReleaseDate;
 
             await _context.SaveChangesAsync();
         }

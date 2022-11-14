@@ -19,6 +19,7 @@ services:
     ports:
       - 9001:80
     environment:
+      - CONTAINER_IP=moviesapi1
       - CONNECTION_STRING=Server=sql,1433;Database=movies1;User=sa;Password=Pass1234!;
   moviesapi2:
     container_name: moviesapi2
@@ -26,5 +27,12 @@ services:
     ports:
       - 9002:80
     environment:
+      - CONTAINER_IP=moviesapi2
       - CONNECTION_STRING=Server=sql,1433;Database=movies2;User=sa;Password=Pass1234!;
+  syncnode:
+    container_name: sync-node
+    image: syncnode:latest
+    ports:
+      - 9998:80
+
   

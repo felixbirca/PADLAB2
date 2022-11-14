@@ -1,13 +1,16 @@
 ﻿using FastEndpoints;
 using FluentValidation;
+using Movies.API.Helpers;
+using System.Text.Json.Serialization;
 
 namespace Movies.API.DTOs
 {
-    public class CreateMovieDto
+    public class CreateMovieDto : BaseRequest
     {
         public string Title { get; set; } = string.Empty;
         public long Budget { get; set; }
-        public DateOnly RleaseDate { get; set; }
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly ReleaseDate { get; set; }
         public ICollection<string> Actors { get; set; } = new List<string>();
     }
 
@@ -23,7 +26,7 @@ namespace Movies.API.DTOs
                 .NotEmpty()
                 .WithMessage("Budget is required");
 
-            RuleFor(x => x.RleaseDate)
+            RuleFor(x => x.ReleaseDate)
                 .NotEmpty()
                 .WithMessage("Release date is required");
         }

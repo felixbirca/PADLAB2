@@ -1,3 +1,4 @@
+using Common;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Http.Json;
@@ -17,18 +18,10 @@ namespace Movies.API
             // Add services to the container.
             builder.Services.AddFastEndpoints();
             builder.Services.AddSwaggerDoc();
-
-            //builder.Services.AddCors(o => o.AddPolicy(name: "Default",
-            //         policy => { policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); }));
-            //var httpClient = new HttpClient();
-            //var response = httpClient.Send(new HttpRequestMessage { RequestUri = new Uri("http://syncendpoint.local") });
-            //var connectionString = builder.Configuration.GetConnectionString("Default");
             builder.Services.Configure<JsonOptions>(options => options.SerializerOptions.Converters.Add(new DateOnlyJsonConverter()));
-
             builder.Services.AddDbContext<MoviesDbContext>(x => x.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING")));
             builder.Services.AddScoped<IMoviesService, MoviesService>();
             builder.Services.AddScoped<IUsersService, UsersService>();
-
 
             var app = builder.Build();
 
@@ -45,10 +38,10 @@ namespace Movies.API
 
             await using var scope = app.Services.CreateAsyncScope();
             using var db = scope.ServiceProvider.GetService<MoviesDbContext>();
-
-          
             await DoWithRetryAsync(async () => { await db.Database.MigrateAsync(); }, TimeSpan.FromSeconds(2), 10);
-            //await db.Database.MigrateAsync();
+
+            var syncNodeClient = new SyncNodeClient();
+            await syncNodeClient.RegisterNode(new NodeInfoDto { IpAddress = Environment.GetEnvironmentVariable("CONTAINER_IP") });
 
             app.Run();
         }

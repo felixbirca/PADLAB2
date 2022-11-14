@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Movies.API.DTOs
 {
-    public class CreateUserDto
+    public class CreateUserDto : BaseRequest
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 
     public class CreateUserDtoValidator : Validator<CreateUserDto>
